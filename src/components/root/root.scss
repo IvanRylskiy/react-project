@@ -1,0 +1,9 @@
+@import '../preloader/preloader.scss';
+
+.parent-div {
+  &__loading {
+    @extend %block-preloader;
+  }
+  width: 100vw;
+  height: 100vh;
+}
