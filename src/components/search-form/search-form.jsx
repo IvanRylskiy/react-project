@@ -10,7 +10,7 @@ class SearchForm extends React.Component {
   };
 
   render() {
-    const { type, searchLine, cleanSearchState, filterItems } = this.props;
+    const { type, searchLine, cleanSearchState } = this.props;
 
     return (
       <div className="search-form">
@@ -21,7 +21,6 @@ class SearchForm extends React.Component {
           data-name="type"
           value={type}
           onChange={this.handleInput}
-          onBlur={filterItems}
         >
           <option value="" disabled>
             Счет/расход
@@ -41,7 +40,6 @@ class SearchForm extends React.Component {
           data-name="searchLine"
           value={searchLine}
           onChange={this.handleInput}
-          onBlur={filterItems}
         />
 
         {type !== '' && searchLine !== '' && (

@@ -16,24 +16,22 @@ class Root extends React.Component {
     accounts: [],
     loading: false,
     type: '',
-    searchLine: '',
-    filteredCosts: [],
-    filteredAccounts: []
+    searchLine: ''
   };
 
   componentDidMount() {
     this.setState({ loading: true });
+    // Promise.all()
+    //   .then(this.filterItems)
+    //   .then(this.setState({ accounts, loading: false }));
     ckRequest.get('/costs').then(response => {
       const costs = response.data.data;
       this.setState({ costs, loading: false });
     });
-    ckRequest
-      .get('/accounts')
-      .then(response => {
-        const accounts = response.data.data;
-        this.setState({ accounts, loading: false });
-      })
-      .then(this.filterItems);
+    ckRequest.get('/accounts').then(response => {
+      const accounts = response.data.data;
+      this.setState({ accounts, loading: false });
+    });
   }
 
   addItem = (type, category, date, value, comment) => {
@@ -134,38 +132,29 @@ class Root extends React.Component {
     this.setState({ [name]: value });
   };
 
-  filterItems = () => {
-    const { type, searchLine, costs, accounts } = this.state;
-
-    this.setState({ filteredCosts: costs, filteredAccounts: accounts });
+  filterItems = arr => {
+    const { type, searchLine } = this.state;
+    let filteredArr = arr;
 
     if (type && searchLine) {
-      const filteredType = 'filtered'.concat(
-        type[0].toUpperCase(),
-        type.slice(1)
-      );
-      this.setState(prevState => ({
-        [filteredType]: prevState[type].filter(item => {
-          for (let key in item) {
-            if (
-              item[key].toLowerCase().match(searchLine.toLowerCase()) !== null
-            ) {
-              return item;
-            }
+      filteredArr = filteredArr.filter(item => {
+        for (let key in item) {
+          if (
+            item[key].toLowerCase().match(searchLine.toLowerCase()) !== null
+          ) {
+            return item;
           }
-        })
-      }));
+        }
+      });
     }
+
+    return filteredArr;
   };
 
   cleanSearchState = () => {
-    const { costs, accounts } = this.state;
-
     this.setState({
       type: '',
-      searchLine: '',
-      filteredCosts: costs,
-      filteredAccounts: accounts
+      searchLine: ''
     });
   };
 
@@ -203,18 +192,30 @@ class Root extends React.Component {
     return costsSorted;
   };
 
+  setAccounts = (type, arr) => {
+    if (type === '' || type === 'costs') {
+      return arr;
+    } else if (type === 'accounts') {
+      return this.filterItems(arr);
+    }
+  };
+
+  setCosts = (type, arr) => {
+    if (type === '' || type === 'accounts') {
+      return arr;
+    } else if (type === 'costs') {
+      return this.filterItems(arr);
+    }
+  };
+
   render() {
     const locale = Locale;
-    const {
-      loading,
-      type,
-      searchLine,
-      filteredCosts,
-      filteredAccounts
-    } = this.state;
+    const { loading, type, searchLine, costs, accounts } = this.state;
+    const filteredCosts = this.setCosts(type, costs);
+    const filteredAccounts = this.setAccounts(type, accounts);
     const sortedCost = this.costsSorting(filteredCosts);
+    // console.log('state on root', this.state);
 
-    console.log('state on root', this.state);
     return (
       <div
         className={classNames('parent-div', { 'parent-div__loading': loading })}
