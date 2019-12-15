@@ -139,10 +139,12 @@ class Root extends React.Component {
     if (type && searchLine) {
       filteredArr = filteredArr.filter(item => {
         for (let key in item) {
-          if (
-            item[key].toLowerCase().match(searchLine.toLowerCase()) !== null
-          ) {
-            return item;
+          if (key !== 'id') {
+            if (
+              item[key].toLowerCase().match(searchLine.toLowerCase()) !== null
+            ) {
+              return item;
+            }
           }
         }
       });

@@ -97,7 +97,7 @@ input[data-name='value'] {
   .currency {
     position: absolute;
     right: 0px;
-    top: 7px
+    top: 7px;
   }
 
   input[data-name='value'] {
@@ -112,8 +112,12 @@ input[data-name='value'] {
   .currency {
     top: 12px;
   }
-  
+
   input[data-name='value'] {
     top: 10px;
   }
+}
+
+button {
+  outline: none;
 }
