@@ -1,0 +1,28 @@
+.costs-list {
+  width: 35vw;
+
+  .date {
+    font-size: 18px;
+    color: #696868;
+  }
+
+  .costs {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.13);
+    height: 100px;
+    padding: 20px;
+    height: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    input {
+      border-bottom: 1px transparent solid;
+    }
+
+    input:hover,
+    input:focus {
+      border-bottom: 1px black solid;
+    }
+  }
+}

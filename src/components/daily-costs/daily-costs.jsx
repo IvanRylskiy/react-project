@@ -10,18 +10,20 @@ class DailyCosts extends React.Component {
     return (
       <div className="daily-costs">
         <div className="date">{costs.length ? costs[0].date : ''}</div>
-        {costs.map(({ id, category, comment, value }) => (
-          <Cost
-            id={id}
-            category={category}
-            comment={comment}
-            value={value}
-            deleteItem={deleteItem}
-            handleInputEdit={handleInputEdit}
-            editItem={editItem}
-            key={id}
-          />
-        ))}
+        <div className="costs">
+          {costs.map(({ id, category, comment, value }) => (
+            <Cost
+              id={id}
+              category={category}
+              comment={comment}
+              value={value}
+              deleteItem={deleteItem}
+              handleInputEdit={handleInputEdit}
+              editItem={editItem}
+              key={id}
+            />
+          ))}
+        </div>
       </div>
     );
   }

@@ -4,7 +4,14 @@ import ButtonFormAdd from '../button-form-add';
 import './form-add.scss';
 
 class FormAdd extends React.Component {
-  state = { type: '', category: '', date: '', value: '', comment: '' };
+  state = {
+    type: '',
+    category: '',
+    date: '',
+    value: '',
+    comment: '',
+    dateType: 'text'
+  };
 
   handleInput = event => {
     const name = event.target.dataset.name;
@@ -16,13 +23,15 @@ class FormAdd extends React.Component {
     const { addItem } = this.props;
     const { type, category, date, value, comment } = this.state;
 
+    console.log(this.state);
     addItem(type, category, date, value, comment);
     this.setState({
       type: '',
       category: '',
       date: '',
       value: '',
-      comment: ''
+      comment: '',
+      dateType: 'text'
     });
   };
 
@@ -40,8 +49,12 @@ class FormAdd extends React.Component {
     return type.length > 0 && value.length > 0 && comment.length > 0;
   };
 
+  dateTypeOnFocus = () => {
+    this.setState({ dateType: 'date' });
+  };
+
   render() {
-    const { type, category, date, value, comment } = this.state;
+    const { type, category, date, value, comment, dateType } = this.state;
     const costButtonIsEnabled = this.costButtonIsEnabled(
       type,
       category,
@@ -75,7 +88,7 @@ class FormAdd extends React.Component {
             Расход
           </option>
         </select>
-        {this.state.type === 'cost' ? (
+        {this.state.type === 'costs' ? (
           <select
             id="category"
             data-name="category"
@@ -83,7 +96,7 @@ class FormAdd extends React.Component {
             onChange={this.handleInput}
           >
             <option value="" disabled>
-              Выберите категорию
+              Категория
             </option>
             <option data-name="category" value="Продукты">
               Продукты
@@ -113,11 +126,14 @@ class FormAdd extends React.Component {
         ) : (
           ''
         )}
-        {this.state.type === 'cost' ? (
+        {this.state.type === 'costs' ? (
           <input
-            type="date"
+            type={dateType}
             data-name="date"
+            placeholder="дд.мм.гггг"
+            style={{ width: '140px' }}
             value={date}
+            onFocus={this.dateTypeOnFocus}
             onChange={this.handleInput}
           />
         ) : (
@@ -141,7 +157,10 @@ class FormAdd extends React.Component {
           onChange={this.handleInput}
         />
         {this.state.type === '' ? (
-          <ButtonFormAdd disabled={true} onClick={this.addItem} />
+          <ButtonFormAdd
+            style={{ backgroundColor: '#cccccc' }}
+            disabled={true}
+          />
         ) : (
           ''
         )}

@@ -8,19 +8,24 @@ class AccountsList extends React.Component {
     const { accounts, deleteItem, handleInputEdit, editItem } = this.props;
 
     return (
-      <div className="accounts-list">
-        {accounts.map(({ id, comment, value }) => (
-          <Account
-            key={id}
-            comment={comment}
-            value={value}
-            id={id}
-            deleteItem={deleteItem}
-            handleInputEdit={handleInputEdit}
-            editItem={editItem}
-          />
-        ))}
-      </div>
+      <>
+        <div className="info">
+          Счета
+        </div>
+        <div className="accounts">
+          {accounts.map(({ id, comment, value }) => (
+            <Account
+              key={id}
+              comment={comment}
+              value={value}
+              id={id}
+              deleteItem={deleteItem}
+              handleInputEdit={handleInputEdit}
+              editItem={editItem}
+            />
+          ))}
+        </div>
+      </>
     );
   }
 }

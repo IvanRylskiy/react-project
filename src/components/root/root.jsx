@@ -158,6 +158,22 @@ class Root extends React.Component {
     });
   };
 
+  setAccounts = (type, arr) => {
+    if (type === '' || type === 'costs') {
+      return arr;
+    } else if (type === 'accounts') {
+      return this.filterItems(arr);
+    }
+  };
+
+  setCosts = (type, arr) => {
+    if (type === '' || type === 'accounts') {
+      return arr;
+    } else if (type === 'costs') {
+      return this.filterItems(arr);
+    }
+  };
+
   costsSorting = costs => {
     const dates = [];
     const costsSorted = {};
@@ -192,70 +208,77 @@ class Root extends React.Component {
     return costsSorted;
   };
 
-  setAccounts = (type, arr) => {
-    if (type === '' || type === 'costs') {
-      return arr;
-    } else if (type === 'accounts') {
-      return this.filterItems(arr);
-    }
-  };
-
-  setCosts = (type, arr) => {
-    if (type === '' || type === 'accounts') {
-      return arr;
-    } else if (type === 'costs') {
-      return this.filterItems(arr);
-    }
-  };
-
   render() {
     const locale = Locale;
     const { loading, type, searchLine, costs, accounts } = this.state;
     const filteredCosts = this.setCosts(type, costs);
     const filteredAccounts = this.setAccounts(type, accounts);
     const sortedCost = this.costsSorting(filteredCosts);
-    // console.log('state on root', this.state);
 
     return (
-      <div
-        className={classNames('parent-div', { 'parent-div__loading': loading })}
-      >
-        <FormAdd addItem={this.addItem} />
+      <>
+        <div className="bg"></div>
+        <div
+          className={classNames('parent-div', {
+            'parent-div__loading': loading
+          })}
+        >
+          <header className="header">
+            <div className="header__container">
+              <img
+                src="./site-logo.png"
+                alt="site-logo"
+                className="header__logo"
+              />
+              <span className="header__span">CopperKeeper</span>
+            </div>
+          </header>
 
-        <SearchForm
-          type={type}
-          searchLine={searchLine}
-          handleInputSearch={this.handleInputSearch}
-          filterItems={this.filterItems}
-          cleanSearchState={this.cleanSearchState}
-        />
+          <FormAdd addItem={this.addItem} />
 
-        {filteredAccounts.length === 0 && (
-          <div className="">{locale.accountsList.emptyMessage}</div>
-        )}
-        {filteredAccounts.length > 0 && (
-          <AccountsList
-            accounts={filteredAccounts}
-            deleteItem={this.deleteItem}
-            handleInputEdit={this.handleInputEdit}
-            editItem={this.editItem}
+          <SearchForm
+            type={type}
+            searchLine={searchLine}
+            handleInputSearch={this.handleInputSearch}
+            filterItems={this.filterItems}
+            cleanSearchState={this.cleanSearchState}
           />
-        )}
 
-        {filteredCosts.length === 0 && (
-          <div className="">{locale.costsList.emptyMessage}</div>
-        )}
-        {filteredCosts.length > 0 &&
-          Object.keys(sortedCost).map(key => (
-            <CostsList
-              key={key}
-              costs={sortedCost[key]}
-              deleteItem={this.deleteItem}
-              handleInputEdit={this.handleInputEdit}
-              editItem={this.editItem}
-            />
-          ))}
-      </div>
+          <div className="lists">
+            <div className="accounts-list">
+              {filteredAccounts.length === 0 && (
+                <div className="empty">{locale.accountsList.emptyMessage}</div>
+              )}
+              {filteredAccounts.length > 0 && (
+                <AccountsList
+                  accounts={filteredAccounts}
+                  deleteItem={this.deleteItem}
+                  handleInputEdit={this.handleInputEdit}
+                  editItem={this.editItem}
+                />
+              )}
+            </div>
+
+            <div className="costs-list">
+              {filteredCosts.length === 0 && (
+                <div className="empty empty-costs">
+                  {locale.costsList.emptyMessage}
+                </div>
+              )}
+              {filteredCosts.length > 0 &&
+                Object.keys(sortedCost).map(key => (
+                  <CostsList
+                    key={key}
+                    costs={sortedCost[key]}
+                    deleteItem={this.deleteItem}
+                    handleInputEdit={this.handleInputEdit}
+                    editItem={this.editItem}
+                  />
+                ))}
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 }

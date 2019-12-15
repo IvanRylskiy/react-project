@@ -14,7 +14,7 @@ class SearchForm extends React.Component {
 
     return (
       <div className="search-form">
-        <span>Искать</span>
+        <span>Искать:</span>
 
         <select
           id="type"
@@ -43,7 +43,7 @@ class SearchForm extends React.Component {
         />
 
         {type !== '' && searchLine !== '' && (
-          <button onClick={cleanSearchState}>Сбросить</button>
+          <button onClick={cleanSearchState}>×</button>
         )}
       </div>
     );

@@ -83,7 +83,7 @@ class Cost extends React.Component {
           onChange={this.handleInputEdit}
           onBlur={this.editItem}
         />
-        <span className="cost__currency">₽</span>
+        <span className="currency">₽</span>
       </div>
     );
   }
