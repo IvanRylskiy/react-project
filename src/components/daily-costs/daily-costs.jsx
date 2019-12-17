@@ -35,26 +35,44 @@ class DailyCosts extends React.Component {
     return fullDate;
   };
 
+  total = () => {
+    const { costs } = this.props;
+    let total = 0;
+
+    costs.map(item => {
+      total = +total + +item.value;
+    });
+
+    return total;
+  };
+
   render() {
     const { costs, deleteItem, handleInputEdit, editItem } = this.props;
     const date = this.date();
+    const total = this.total();
 
     return (
       <div className="daily-costs">
         <div className="date">{date}</div>
-        <div className="costs">
-          {costs.map(({ id, category, comment, value }) => (
-            <Cost
-              id={id}
-              category={category}
-              comment={comment}
-              value={value}
-              deleteItem={deleteItem}
-              handleInputEdit={handleInputEdit}
-              editItem={editItem}
-              key={id}
-            />
-          ))}
+        <div className="costs-card">
+          <div className="costs">
+            {costs.map(({ id, category, comment, value }) => (
+              <Cost
+                id={id}
+                category={category}
+                comment={comment}
+                value={value}
+                deleteItem={deleteItem}
+                handleInputEdit={handleInputEdit}
+                editItem={editItem}
+                key={id}
+              />
+            ))}
+          </div>
+          <div className="costs-info">
+            <div className="value">− {total} ₽</div>
+            <div className="total">итого</div>
+          </div>
         </div>
       </div>
     );

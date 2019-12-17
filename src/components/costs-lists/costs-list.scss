@@ -6,15 +6,18 @@
     color: #696868;
   }
 
-  .costs {
-    background-color: #fff;
+  .costs-card {
     border-radius: 4px;
     box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.13);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+  }
+
+  .costs {
     height: 100px;
     padding: 20px;
     height: 100%;
-    margin-top: 15px;
-    margin-bottom: 15px;
 
     input {
       border-bottom: 1px transparent solid;
@@ -23,6 +26,25 @@
     input:hover,
     input:focus {
       border-bottom: 1px black solid;
+    }
+  }
+
+  .costs-info {
+    background-color: rgba(244, 244, 241, 0.4);
+    border-top: 1px solid #e8e7e7;
+    height: 40px;
+    padding: 20px;
+    text-align: end;
+
+    .value {
+      color: #e53935;
+      font-size: 18px;
+    }
+
+    .total {
+      margin-top: 5px;
+      font-size: 10px;
+      color: #9a9898;
     }
   }
 }

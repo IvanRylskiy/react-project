@@ -11,9 +11,28 @@
   background-color: rgba(244, 244, 241, 0.4);
   height: 40px;
   padding: 20px;
-  font-size: 18px;
-  text-transform: uppercase;
-  color: #797878;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__heading {
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #797878;
+  }
+
+  .value-sum {
+    color: #30c030;
+    font-size: 18px;
+  }
+
+  .available {
+    margin-top: 5px;
+    font-size: 10px;
+    color: #9a9898;
+    text-transform: lowercase;
+    text-align: end;
+  }
 }
 
 .accounts {
