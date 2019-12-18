@@ -19,6 +19,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 * {
   font-size: 14px;
 }
@@ -36,6 +40,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  min-height: 100vh;
 }
 
 .header {
@@ -75,6 +80,7 @@ body {
   width: 75vw;
   margin: 0 auto;
   justify-content: space-between;
+  flex: 1 0 auto;
 }
 
 .empty {
@@ -120,4 +126,23 @@ input[data-name='value'] {
 
 button {
   outline: none;
+}
+
+.footer {
+  margin-top: 40px;
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.13);
+  background-color: #fff;
+  height: 80px;
+  flex: 0 0 auto;
+}
+
+.footer-container {
+  background-color: rgba(244, 244, 241, 0.4);
+  line-height: 80px;
+  text-align: center;
+
+  .git-link {
+    text-decoration: none;
+    color: #4f4f4f;
+  }
 }

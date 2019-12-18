@@ -41,6 +41,7 @@ class DailyCosts extends React.Component {
 
     costs.map(item => {
       total = +total + +item.value;
+      return item;
     });
 
     return total;

@@ -21,16 +21,13 @@ class Root extends React.Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    // Promise.all()
-    //   .then(this.filterItems)
-    //   .then(this.setState({ accounts, loading: false }));
-    ckRequest.get('/costs').then(response => {
-      const costs = response.data.data;
-      this.setState({ costs, loading: false });
-    });
     ckRequest.get('/accounts').then(response => {
       const accounts = response.data.data;
       this.setState({ accounts, loading: false });
+    });
+    ckRequest.get('/costs').then(response => {
+      const costs = response.data.data;
+      this.setState({ costs, loading: false });
     });
   }
 
@@ -279,6 +276,18 @@ class Root extends React.Component {
                 ))}
             </div>
           </div>
+
+          <footer className="footer">
+            <div className="footer-container">
+              <a
+                target="_blank"
+                href="https://github.com/IvanRylskiy"
+                className="git-link"
+              >
+                © Ivan Rylskiy
+              </a>
+            </div>
+          </footer>
         </div>
       </>
     );

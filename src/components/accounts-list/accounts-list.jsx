@@ -10,6 +10,7 @@ class AccountsList extends React.Component {
 
     accounts.map(item => {
       valueSum = +valueSum + +item.value;
+      return item;
     });
 
     return valueSum;
