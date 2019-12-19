@@ -284,7 +284,7 @@ class Root extends React.Component {
                 href="https://github.com/IvanRylskiy"
                 className="git-link"
               >
-                © Ivan Rylskiy
+                Ivan Rylskiy
               </a>
             </div>
           </footer>
