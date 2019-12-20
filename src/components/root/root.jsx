@@ -21,13 +21,18 @@ class Root extends React.Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    ckRequest.get('/accounts').then(response => {
+
+    const getAccounts = ckRequest.get('/accounts').then(response => {
       const accounts = response.data.data;
-      this.setState({ accounts, loading: false });
+      this.setState({ accounts });
     });
-    ckRequest.get('/costs').then(response => {
+    const getCosts = ckRequest.get('/costs').then(response => {
       const costs = response.data.data;
-      this.setState({ costs, loading: false });
+      this.setState({ costs });
+    });
+
+    Promise.all([getAccounts, getCosts]).then(() => {
+      this.setState({ loading: false });
     });
   }
 

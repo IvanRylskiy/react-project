@@ -66,8 +66,9 @@ class Cost extends React.Component {
         <input
           className="cost__comment"
           type="text"
-          size={comment.length * 1.2 || 6}
+          size={comment.length * 1.2 || 12}
           data-name="comment"
+          placeholder="Комментарий"
           data-id={id}
           value={comment}
           onChange={this.handleInputEdit}
@@ -78,6 +79,7 @@ class Cost extends React.Component {
           type="text"
           size={value.length * 1.2 || 6}
           data-name="value"
+          placeholder="123.45"
           data-id={id}
           value={value}
           onChange={this.handleInputEdit}

@@ -34,9 +34,10 @@ class Account extends React.Component {
           className="account__comment"
           data-name="comment"
           type="text"
+          placeholder="Комментарий"
           data-id={id}
           value={comment}
-          size={comment.length * 1.2 || 6}
+          size={comment.length * 1.2 || 12}
           onChange={this.handleInputEdit}
           onBlur={this.editItem}
         />
@@ -44,6 +45,7 @@ class Account extends React.Component {
           className="account__value"
           data-name="value"
           type="text"
+          placeholder="123.45"
           data-id={id}
           value={value}
           size={value.length * 1.2 || 6}
